@@ -1,0 +1,1 @@
+<a href="<?php echo $base; ?>authenticate/twitter">Register on LifeBank</a>
