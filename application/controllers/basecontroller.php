@@ -30,6 +30,7 @@ class Basecontroller extends CI_Controller {
             
         );
         $this->data['base'] = $this->config->item('base_url');
+        $this->rest->initialize(array('server' => $this->config->item('lifebank_api_url')));
     }
 
     protected function addExtraScripts($scripts = array()) {
