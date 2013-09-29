@@ -13,17 +13,13 @@ class Home extends Basecontroller {
             redirect('/');
     }
 
-    public function init() {
-        $result = $this->rest->get('user/get', array('id' => $this->session->userdata('user_id')), 'json');
-        if (!$result->status)
-            redirect('/');
+    public function init() {      
 
         $locations = $this->rest->get('locations/all', array(), 'json');
         $bloodgroups = $this->rest->get('bloodgroups/all', array(), 'json');
 
         $this->data['locations'] = $locations;
         $this->data['bloodgroups'] = $bloodgroups;
-        $this->data['user'] = $result->user;
     }
 
     public function index() {

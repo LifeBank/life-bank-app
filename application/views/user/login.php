@@ -1,38 +1,39 @@
-<div class="comingsoonBlk">
-    <h1>LifeBank!!!</h1>
-    <p>Login
-    </p>
-    <div class="socialMedia">
-        <form method="POST" action="<?php echo $base; ?>user/login/submit">
 
-            <?php if (isset($errors)) { ?>
-                <div style="color: red">
-                    <?php foreach ($errors as $error) { ?>
-                        <p><?php echo $error; ?></p>
-                    <?php } ?>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-offset-3">
+                <div class="panel panel-default pane">
+                    <h3>Login</h3>
+                    <div class="panel-body">
+                        <form role="form" method="POST" action="<?php echo $base; ?>user/login/submit">
+
+                            <?php if (isset($errors)) { ?>
+                                <div class="alert alert-error">
+                                    <?php foreach ($errors as $error) { ?>
+                                        <p><?php echo $error; ?></p>
+                                    <?php } ?>
+                                </div>
+
+                            <?php } ?>
+
+                            <div class="form-group">
+                                <!--<label for="exampleInputEmail1">Email address</label>-->
+                                <input type="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Login</button>
+                            <a  href="#">Forgot password? </a>
+                        </form>
+                    </div>
                 </div>
-
-            <?php } ?>
-            <p>
-                <span>
-                    <input type="email" name="email" placeholder="Email Address"/>
-                </span>
-            </p>
-
-            <p>
-                <span>
-                    <input type="password" name="password"  placeholder="Password"/>
-                </span>
-            </p>
-
-            <p>
-                <input type="submit"/>
-            </p>
-        </form>
-        
-        <a  style="color:white" href="<?php echo $base; ?>user/password/forgot">Forgot password? </a>
-
+            </div>
+        </div>
     </div>
-
-    <br class="clr">
 </div>

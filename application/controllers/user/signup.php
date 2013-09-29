@@ -44,13 +44,18 @@ class Signup extends Basecontroller {
 
     public function submit() {
         $this->init();
-        
+
         $email = $this->input->post("email");
         $password = $this->input->post('password');
         $first_name = $this->input->post("first_name");
         $last_name = $this->input->post("last_name");
         $phone_number = $this->input->post("phone_number");
-        $location = $this->input->post("location");
+        
+        $location['location'] = $this->input->post("location");
+        $location['lng'] = $this->input->post("lng");
+        $location['lat'] = $this->input->post("lat");
+        $location = serialize($location);
+        
         $blood_group = $this->input->post("blood_group");
         $image_path = $this->data['signup_data']['image_path'];
 
@@ -67,4 +72,3 @@ class Signup extends Basecontroller {
     }
 
 }
-

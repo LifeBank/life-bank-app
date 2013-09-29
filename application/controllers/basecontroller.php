@@ -9,8 +9,17 @@ class Basecontroller extends CI_Controller {
     protected $content_data = array();
 
     public function __construct() {
-        parent::__construct();
-
+        parent::__construct();        
+        $this->rest->initialize(array('server' => $this->config->item('lifebank_api_url')));
+        
+        if ($this->session->userdata('user_id')) {            
+            $result = $this->rest->get('user/get', array('id' => $this->session->userdata('user_id')), 'json');
+            if (!$result->status) {
+                $this->session->unset_userdata('user_id');
+                redirect('/');
+            }
+            $this->data['user'] = $result->user;
+        }
         $this->data['styles'] = array(
             'utopia-white.css',
             'utopia-responsive.css',
@@ -27,10 +36,8 @@ class Basecontroller extends CI_Controller {
             'jquery.datatable.js',
             'form.js',
             'ajax_response.js'
-            
         );
         $this->data['base'] = $this->config->item('base_url');
-        $this->rest->initialize(array('server' => $this->config->item('lifebank_api_url')));
     }
 
     protected function addExtraScripts($scripts = array()) {
@@ -42,4 +49,3 @@ class Basecontroller extends CI_Controller {
     }
 
 }
-
