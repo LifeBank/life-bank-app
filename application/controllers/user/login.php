@@ -39,7 +39,7 @@ class Login extends Basecontroller {
             redirect("user/home");
         } else {
             
-            $this->data['errors'] = (isset($result->errors)) ? $result->errors : "An error occured";
+            $this->data['errors'] = (isset($result->errors)) ? $result->errors : array("An error occured");
             $this->load_view();
         }
     }
