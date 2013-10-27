@@ -34,11 +34,12 @@ class Login extends Basecontroller {
         $login = compact("email", "password");
         $result = $this->rest->post('user/login', $login, 'json');
 
-        if ($result->status) {
+        if (isset($result->status) && $result->status) {
             $this->session->set_userdata("user_id", $result->user->id);
             redirect("user/home");
         } else {
-            $this->data['errors'] = $result->errors;
+            
+            $this->data['errors'] = (isset($result->errors)) ? $result->errors : "An error occured";
             $this->load_view();
         }
     }
