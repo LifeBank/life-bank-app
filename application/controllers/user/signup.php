@@ -46,28 +46,36 @@ class Signup extends Basecontroller {
         $this->init();
 
         $email = $this->input->post("email");
-        $password = $this->input->post('password');
+        // $password = $this->input->post('password');
         $first_name = $this->input->post("first_name");
         $last_name = $this->input->post("last_name");
         $phone_number = $this->input->post("phone_number");
-        
+
         $location['location'] = $this->input->post("location");
         $location['lng'] = $this->input->post("lng");
         $location['lat'] = $this->input->post("lat");
         $location = serialize($location);
-        
+
         $blood_group = $this->input->post("blood_group");
         $image_path = $this->data['signup_data']['image_path'];
         $username = $this->data['signup_data']['username'];
 
-        $user = compact("email", "password", "first_name", "last_name", "phone_number", "location", "blood_group", "image_path", "username");       
+        $user = compact("email", "first_name", "last_name", "phone_number", "location", "blood_group", "image_path", "username");
         $result = $this->rest->post('user/registration', $user, 'json');
-        
-        if ($result->status) {
+
+        if (isset($result->status) && $result->status) {
             $this->session->unset_userdata("signup_data");
-            redirect("user/login");
+            $result = $this->rest->get('user/get_with_username', array('username' => $username), 'json');
+            if (isset($result->status) && $result->status) {
+                $this->session->set_userdata("user_id", $result->user->id);
+                redirect("user/home");
+            } else {
+                redirect("/");
+            }
         } else {
-            $this->data['errors'] = $result->errors;
+            if (isset($result->errors)) {
+                $this->data['errors'] = $result->errors;
+            }
             $this->load_view();
         }
     }

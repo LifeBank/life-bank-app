@@ -111,7 +111,7 @@ class Authenticate extends Basecontroller {
             $this->session->set_userdata('signup_data', $signup_data);
 
             $result = $this->rest->get('user/get_with_username', array('username' => $username), 'json');
-            if (!$result->status) {
+            if (isset($result->status) && !$result->status) {
                 redirect("user/signup");
             } else {
                 $this->session->set_userdata("user_id", $result->user->id);

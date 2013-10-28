@@ -21,21 +21,27 @@
 
                             <div class="form-group">
                                 <!--<label for="name">Name</label>-->
-                                <input type="text" value="<?php if (isset($signup_data['first_name'])) echo $signup_data['first_name']; ?>" class="form-control" id="first_name" name="first_name" placeholder="Name">
+                                <input type="text" value="<?php echo (isset($_POST['first_name'])) ?  filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING)  :  ((isset($signup_data['first_name'])) ? $signup_data['first_name'] : ''); ?>" class="form-control" id="first_name" name="first_name" placeholder="Name">
                             </div>
 
                             <div class="form-group">
                                 <!--<label for="name">Name</label>-->
-                                <input type="text" value="<?php if (isset($signup_data['last_name'])) echo $signup_data['last_name']; ?>" class="form-control" id="last_name" name="last_name" placeholder="Name">
+                                <input type="text" value="<?php echo (isset($_POST['last_name'])) ?  filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING) :  ((isset($signup_data['last_name'])) ? $signup_data['last_name'] : ''); ?>" class="form-control" id="last_name" name="last_name" placeholder="Name">
                             </div>
 
                             <div class="form-group">
                                 <!--<label for="exampleInputEmail1">Email address</label>-->
-                                <input type="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                <input type="email" name="email" value="<?php if (isset($_POST['email'])) {
+                                    echo filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+                                }
+                                ?>" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                             </div>
                             <div class="form-group">
                                 <!--<label for="name">Phone</label>-->
-                                <input type="text" value="<?php if(isset($_POST['phone_number'])) echo $_POST['phone_number']; ?>" name="phone_number" class="form-control" id="phone" placeholder="Phone Number">
+                                <input type="text" value="<?php if (isset($_POST['phone_number'])) {
+                                    echo filter_input(INPUT_POST, 'phone_number', FILTER_SANITIZE_STRING);
+                                }
+                                ?>" name="phone_number" class="form-control" id="phone" placeholder="Phone Number">
                             </div>
                             <div class="form-group">
                                 <!--<label for="name">Phone</label>-->
@@ -53,10 +59,6 @@
 
                             <div class="form-group">
                                 <input type="text" name="location" value="<?php if(isset($_POST['location'])) echo $_POST['location']; ?>" class="form-control" id="location" placeholder="Location">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                             </div>
 
                             <button type="submit" class="btn btn-success">Signup</button>
