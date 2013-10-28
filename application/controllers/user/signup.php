@@ -58,10 +58,11 @@ class Signup extends Basecontroller {
         
         $blood_group = $this->input->post("blood_group");
         $image_path = $this->data['signup_data']['image_path'];
+        $username = $this->data['signup_data']['username'];
 
-        $user = compact("email", "password", "first_name", "last_name", "phone_number", "location", "blood_group", "image_path");
+        $user = compact("email", "password", "first_name", "last_name", "phone_number", "location", "blood_group", "image_path", "username");       
         $result = $this->rest->post('user/registration', $user, 'json');
-
+        
         if ($result->status) {
             $this->session->unset_userdata("signup_data");
             redirect("user/login");

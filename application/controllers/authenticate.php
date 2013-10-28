@@ -16,8 +16,8 @@ class Authenticate extends Basecontroller {
         parent::__construct();
 
         if ($this->router->fetch_method() == 'twitter' || $this->router->fetch_method() == 'twitter_callback') {
-            if ($this->session->userdata('signup_data')) {
-                redirect('user/signup');
+            if ($this->session->userdata('signup_data')) {                
+                //redirect('user/signup');
             }
             $this->load->library('Twitteroauth');
         }
@@ -36,7 +36,7 @@ class Authenticate extends Basecontroller {
             'params' => array(
                 'oauth_callback' => $this->data['base'] . 'authenticate/twitter_callback',
             ),
-                ));
+        ));
 
         if ($code != 200) {
             echo $code;
@@ -72,9 +72,9 @@ class Authenticate extends Basecontroller {
         }
 
         $this->twitteroauth->reconfigure(array_merge($this->twitteroauth->config, array(
-                    'token' => $oauth['oauth_token'],
-                    'secret' => $oauth['oauth_token_secret'],
-                )));
+            'token' => $oauth['oauth_token'],
+            'secret' => $oauth['oauth_token_secret'],
+        )));
 
         $code = $this->twitteroauth->user_request(array(
             'method' => 'POST',
@@ -82,14 +82,14 @@ class Authenticate extends Basecontroller {
             'params' => array(
                 'oauth_verifier' => trim($params['oauth_verifier']),
             )
-                ));
+        ));
 
         if ($code == 200) {
             $oauth_creds = $this->twitteroauth->extract_params($this->twitteroauth->response['response']);
             $this->twitteroauth->reconfigure(array_merge($this->twitteroauth->config, array(
-                        'token' => $oauth_creds['oauth_token'],
-                        'secret' => $oauth_creds['oauth_token_secret'],
-                    )));
+                'token' => $oauth_creds['oauth_token'],
+                'secret' => $oauth_creds['oauth_token_secret'],
+            )));
 
             $result = $this->twitteroauth->user_request(array(
                 'method' => 'GET',
@@ -98,11 +98,10 @@ class Authenticate extends Basecontroller {
                     "user_id" => $oauth_creds['user_id'],
                     "screen_name" => $oauth_creds['screen_name']
                 )
-                    ));
+            ));
 
             $result = $this->twitteroauth->response['response'];
             $result = json_decode($result);
-
 
             $username = $result->screen_name;
             $full_name = $result->name;
@@ -111,7 +110,13 @@ class Authenticate extends Basecontroller {
             $signup_data = compact("username", "full_name", "image_path");
             $this->session->set_userdata('signup_data', $signup_data);
 
-            redirect("user/signup");
+            $result = $this->rest->get('user/get_with_username', array('username' => $username), 'json');
+            if (!$result->status) {
+                redirect("user/signup");
+            } else {
+                $this->session->set_userdata("user_id", $result->user->id);
+                redirect("user/home");
+            }
         } else {
             echo $code;
         }
