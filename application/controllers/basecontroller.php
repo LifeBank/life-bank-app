@@ -14,7 +14,7 @@ class Basecontroller extends CI_Controller {
         
         if ($this->session->userdata('user_id')) {            
             $result = $this->rest->get('user/get', array('id' => $this->session->userdata('user_id')), 'json');
-            if (!$result->status) {
+            if (!isset($result->status) || !$result->status) {
                 $this->session->unset_userdata('user_id');
                 redirect('/');
             }

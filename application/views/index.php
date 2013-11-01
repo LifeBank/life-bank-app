@@ -9,7 +9,7 @@
             <a href="<?php echo $base; ?>authenticate/twitter" class="btn btn-primary btn-default reg_life">
               <span class=""><img src="<?php echo $base; ?>assets/images/twitter_icon.png"/></span>
             </a>
-            <a href="<?php echo $base; ?>authenticate/twitter" class="btn btn-primary btn-default reg_life">Register on Lifebank</a>
+            <a href="<?php echo $base; ?>authenticate/twitter" class="btn btn-primary btn-default reg_life">Login With Twitter</a>
           </div>
           
           <a name="how"></a>
@@ -82,7 +82,7 @@
             <a href="<?php echo $base; ?>authenticate/twitter" class="btn btn-primary btn-default reg_life">
               <span class=""><img src="<?php echo $base; ?>assets/images/twitter_icon.png"/></span>
             </a>
-            <a href="<?php echo $base; ?>authenticate/twitter" class="btn btn-primary btn-default reg_life">Register on Lifebank</a>
+            <a href="<?php echo $base; ?>authenticate/twitter" class="btn btn-primary btn-default reg_life">Login With Twitter</a>
           </div>
 
           <p class="c_num" style="border-bottom:none;">It only takes a minute</p>

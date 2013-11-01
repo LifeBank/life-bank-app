@@ -13,7 +13,9 @@ class Index extends Basecontroller {
 
     public function index() {
         $this->data['content'] = "";
-        $this->load->view('layout/admin', $this->data);
+        $this->data['page'] = "";
+        
+        $this->load->view('layout/admin', $this->data);        
     }
 
 }

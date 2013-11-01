@@ -41,9 +41,7 @@
                         <?php if (isset($user)) { ?>
                             <li><a href="<?php echo $base; ?>user/home">Hi <?php echo $user->first_name; ?></a></li>
                             <li><a href="<?php echo $base; ?>user/login/logout">Logout</a></li>
-                        <?php } else { ?>                            
-                            <li><a href="<?php echo $base; ?>user/login">Login</a></li>
-                        <?php } ?>
+                        <?php }  ?>
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>
