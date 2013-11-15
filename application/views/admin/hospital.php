@@ -4,7 +4,7 @@
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
-            
+
             <!-- BEGIN PAGE TITLE & BREADCRUMB-->		
             <h3 class="page-title">
                 Hospitals
@@ -17,55 +17,55 @@
     <!-- BEGIN PAGE CONTENT--
     <div class="row-fluid">
         <div class="span12">
-            <!-- BEGIN EXAMPLE TABLE PORTLET-->
-            <div class="portlet box light-grey">
-                <div class="portlet-title">
-                    <h4><i class="icon-reorder"></i>Hospital Listing</h4>
-                    
-                </div>
-                <div class="portlet-body">
-                    <div style="margin:10px"> <a class="btn" href="#newMedia" data-toggle="modal"><i class="icon-plus"></i> Add Hospital</a> </div>
-                    <?php if ($this->session->flashdata("message")) { ?> <div class="alert alert-success"> <?php echo $this->session->flashdata("message"); ?></div> <?php } ?>
-                     <?php if ($this->session->flashdata("error_message")) { ?> <div class="alert alert-error"> <?php echo $this->session->flashdata("error_message"); ?></div> <?php } ?>
-                    
-                    <table class="table table-striped table-bordered" id="sample_2">
-                        <thead>
-                            <tr>                                    
-                                <th>Hospital</th>
-                                <th>Address</th>
-                                <th>Phone Numbers</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet box light-grey">
+        <div class="portlet-title">
+            <h4><i class="icon-reorder"></i>Hospital Listing</h4>
 
-                            <?php foreach ($hospitals as $hospital) { ?>
-                                <tr class="odd gradeX" >
+        </div>
+        <div class="portlet-body">
+            <div style="margin:10px"> <a class="btn" href="#newMedia" data-toggle="modal"><i class="icon-plus"></i> Add Hospital</a> </div>
+            <?php if ($this->session->flashdata("message")) { ?> <div class="alert alert-success"> <?php echo $this->session->flashdata("message"); ?></div> <?php } ?>
+            <?php if ($this->session->flashdata("error_message")) { ?> <div class="alert alert-error"> <?php echo $this->session->flashdata("error_message"); ?></div> <?php } ?>
 
-                                    <td><?php echo $hospital->hospital_name; ?></td> 
-                                    <td><?php echo $hospital->address; ?></td>
-                                    <td><?php echo $hospital->phone_numbers; ?> </td>
-                                    <td><a href="<?php echo $base; ?>admin/hospital/locations/<?php echo $hospital->id; ?>" class="fancybox fancybox.ajax btn mini purple"><i class="icon-edit"></i>Locations</a></td>
-                                    <td><a href="<?php echo $base; ?>admin/hospital/locations/<?php echo $hospital->id; ?>" class="fancybox fancybox.ajax btn mini purple"><i class="icon-edit"></i>Broadcast</a></td>
-                                    <td><a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a></td>
-                                    <td><a href="#" class="btn mini red"><i class="icon-edit"></i> Delete</a></td>
-                                </tr>
-                            <?php } ?>
+            <table class="table table-striped table-bordered" id="sample_2">
+                <thead>
+                    <tr>                                    
+                        <th style="width: 20%">Hospital</th>
+                        <th style="width: 30%">Address</th>
+                        <th style="width: 10%">Phone Numbers</th>
+                        <th style="width: 10%"></th>
+                        <th style="width: 10%"></th>
+                        <th style="width: 10%"></th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- END EXAMPLE TABLE PORTLET-->
-    
-          
+                    <?php foreach ($hospitals as $hospital) { ?>
+                        <tr class="odd gradeX" >
+
+                            <td><?php echo $hospital->hospital_name; ?></td> 
+                            <td><?php echo $hospital->address; ?></td>
+                            <td><?php echo $hospital->phone_numbers; ?> </td>
+                            <td><a href="<?php echo $base; ?>admin/hospital/locations/<?php echo $hospital->id; ?>" class="fancybox fancybox.ajax btn mini purple"><i class="icon-edit"></i>Locations</a></td>
+                            <td><a href="<?php echo $base; ?>admin/hospital/locations/<?php echo $hospital->id; ?>" class="fancybox fancybox.ajax btn mini purple"><i class="icon-edit"></i>Broadcast</a></td>
+                            <td><a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a></td>
+                            <td><a href="<?php echo $base; ?>admin/hospital/delete/<?php echo $hospital->id; ?>" class="btn mini red delete"><i class="icon-edit"></i> Delete</a></td>
+                        </tr>
+                    <?php } ?>
+
+                </tbody>
+            </table>
         </div>
     </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
 
-    <!-- END PAGE CONTENT-->
+
+</div>
+</div>
+
+<!-- END PAGE CONTENT-->
 </div>
 <!-- END PAGE CONTAINER-->
 
@@ -86,9 +86,9 @@
         </div>
 
         <form class="form-horizontal" id="moderatorForm" method="POST" action="<?php echo $base; ?>admin/hospital/submit">
-            
 
-           
+
+
             <div class="control-group">
                 <label class="control-label" for="input01">Hospital Name</label>
                 <div class="controls">
@@ -100,20 +100,20 @@
 
             <div class="control-group">
                 <label class="control-label" for="input01">Address</label>
-                 <div class="controls">
-                     <textarea class="input-xlarge" id="address" name="address">
+                <div class="controls">
+                    <textarea class="input-xlarge" id="address" name="address">
                         
-                     </textarea>                  
+                    </textarea>                  
                 </div>
             </div>
-            
-             <div class="control-group">
+
+            <div class="control-group">
                 <label class="control-label" for="input01">Phone Numbers</label>
                 <div class="controls">
                     <input type="text" class="input-xlarge" id="phone_numbers" name="phone_numbers"/>
                 </div>
             </div>            
-          
+
         </form>
 
     </div>
@@ -135,52 +135,58 @@
 
 
 <script type="text/javascript">
-	  
-     $('.fancybox').fancybox();
-    $('#moderatorBtn').click(function(){
-        $('#moderatorForm').submit();
-        
+
+    $('.delete').click(function()
+    {
+        if (!confirm('Are you sure you want to delete this hospital?'))
+            return false;
     });
     
+    $('.fancybox').fancybox();
+    $('#moderatorBtn').click(function() {
+        $('#moderatorForm').submit();
+
+    });
+
     $().ready(function()
     {
         var options = {
             beforeSubmit: before,
             success: response
         };
-        $('#moderatorForm').ajaxForm(options);         
-       
+        $('#moderatorForm').ajaxForm(options);
+
     });
-    
-  
-	
+
+
+
     function before()
     {
-        if( $('#moderatorBtn').hasClass('disabled') )
+        if ($('#moderatorBtn').hasClass('disabled'))
         {
-            return false;	
+            return false;
         }
-		
+
         $('#loader').show();
         $('#moderatorBtn').addClass('disabled');
         $('#add_error').slideUp('fast');
     }
-	
+
     function response(responseText, statusText, xhr, $form)
     {
-	
+
         console.log(responseText);
         getResponse(responseText);
-		
-        if( status == "error" )
+
+        if (status == "error")
         {
             $('#add_error').html(message).slideDown('fast');
             $('#moderatorBtn').removeClass('disabled');
             $('#loader').hide();
-        }else
+        } else
         {
             location.reload();
-        }	
-		
+        }
+
     }
 </script>

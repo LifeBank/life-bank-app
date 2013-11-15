@@ -31,6 +31,17 @@ class Location extends Basecontroller {
         $this->load->view('layout/admin', $this->data);
     }
 
+    public function delete($location_id = 0) {
+        $location_id = (int) $location_id;
+        if (!$location_id) {
+            redirect('admin/location');
+        }
+
+        $this->rest->get('location/delete', array("location_id" => $location_id));
+        $this->session->set_flashdata('message', 'Location successfully deleted.');
+        redirect("admin/location");
+    }
+
     public function submit() {
         $this->form_validation->set_rules('location', 'Location', 'trim|required');
         $this->form_validation->set_rules('short_name', 'Short Name', 'trim|required');

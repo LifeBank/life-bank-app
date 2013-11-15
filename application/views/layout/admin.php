@@ -83,6 +83,7 @@
                     <li class="<?php if ($page == 'location') echo 'active'; ?>"><a class="" href="<?php echo $base; ?>admin/location"><i class="icon-user"></i> Locations</a></li>
                     <li class="<?php if ($page == 'state') echo 'active'; ?>"><a class="" href="<?php echo $base; ?>admin/state"><i class="icon-user"></i> States</a></li>
                     <li class="<?php if ($page == 'hospital') echo 'active'; ?>"><a class="" href="<?php echo $base; ?>admin/hospital"><i class="icon-user"></i> Hospitals</a></li>
+                    <li class="<?php if ($page == 'user') echo 'active'; ?>"><a class="" href="<?php echo $base; ?>admin/user"><i class="icon-user"></i> Users</a></li>
 
                 </ul>
                 <!-- END SIDEBAR MENU -->

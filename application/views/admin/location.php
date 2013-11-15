@@ -4,7 +4,7 @@
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
-            
+
             <!-- BEGIN PAGE TITLE & BREADCRUMB-->		
             <h3 class="page-title">
                 Locations
@@ -17,47 +17,47 @@
     <!-- BEGIN PAGE CONTENT--
     <div class="row-fluid">
         <div class="span12">
-            <!-- BEGIN EXAMPLE TABLE PORTLET-->
-            <div class="portlet box light-grey">
-                <div class="portlet-title">
-                    <h4><i class="icon-reorder"></i>Location Listing</h4>
-                    
-                </div>
-                <div class="portlet-body">
-                    <div style="margin:10px"> <a class="btn" href="#newMedia" data-toggle="modal"><i class="icon-plus"></i> Add Location</a> </div>
-                    <?php if ($this->session->flashdata("message")) { ?> <div class="alert alert-success"> <?php echo $this->session->flashdata("message"); ?></div> <?php } ?>
-                     <?php if ($this->session->flashdata("error_message")) { ?> <div class="alert alert-error"> <?php echo $this->session->flashdata("error_message"); ?></div> <?php } ?>
-                    
-                    <table class="table table-striped table-bordered" id="sample_2">
-                        <thead>
-                            <tr>                                    
-                                <th>Location</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet box light-grey">
+        <div class="portlet-title">
+            <h4><i class="icon-reorder"></i>Location Listing</h4>
 
-                            <?php foreach ($locations as $location) { ?>
-                                <tr class="odd gradeX" >
+        </div>
+        <div class="portlet-body">
+            <div style="margin:10px"> <a class="btn" href="#newMedia" data-toggle="modal"><i class="icon-plus"></i> Add Location</a> </div>
+            <?php if ($this->session->flashdata("message")) { ?> <div class="alert alert-success"> <?php echo $this->session->flashdata("message"); ?></div> <?php } ?>
+            <?php if ($this->session->flashdata("error_message")) { ?> <div class="alert alert-error"> <?php echo $this->session->flashdata("error_message"); ?></div> <?php } ?>
 
-                                    <td><?php echo $location->location; ?></td>  
-                                    <td><a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a></td>
-                                    <td><a href="#" class="btn mini red"><i class="icon-edit"></i> Delete</a></td>
-                                </tr>
-                            <?php } ?>
+            <table class="table table-striped table-bordered" id="sample_2">
+                <thead>
+                    <tr>                                    
+                        <th>Location</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- END EXAMPLE TABLE PORTLET-->
-    
-          
+                    <?php foreach ($locations as $location) { ?>
+                        <tr class="odd gradeX" >
+
+                            <td><?php echo $location->location; ?></td>  
+                            <td><a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a></td>
+                            <td><a href="<?php echo $base ?>admin/location/delete/<?php echo $location->id; ?>" class="btn mini red delete"><i class="icon-edit"></i> Delete</a></td>
+                        </tr>
+                    <?php } ?>
+
+                </tbody>
+            </table>
         </div>
     </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
 
-    <!-- END PAGE CONTENT-->
+
+</div>
+</div>
+
+<!-- END PAGE CONTENT-->
 </div>
 <!-- END PAGE CONTAINER-->
 
@@ -78,9 +78,9 @@
         </div>
 
         <form class="form-horizontal" id="moderatorForm" method="POST" action="<?php echo $base; ?>admin/location/submit">
-            
 
-           
+
+
             <div class="control-group">
                 <label class="control-label" for="input01">Location</label>
                 <div class="controls">
@@ -92,12 +92,12 @@
 
             <div class="control-group">
                 <label class="control-label" for="input01">Short Name</label>
-                 <div class="controls">
+                <div class="controls">
                     <input type="text" class="input-xlarge" id="short_name" name="short_name"/>
                 </div>
             </div>
-            
-             <div class="control-group">
+
+            <div class="control-group">
                 <label class="control-label" for="input01">State</label>
                 <div class="controls">
                     <select class="input-xlarge" id="state_id" name="state_id">                         
@@ -105,19 +105,19 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="control-group">
                 <label class="control-label" for="input01">Parent</label>
                 <div class="controls">
                     <select class="input-xlarge" id="parent_id" name="parent_id">    
                         <option value="0">Nil</option>
-                       <?php foreach($locations as $location){ ?> 
-                         <option value="<?php echo $location->id; ?>"><?php echo $location->location; ?></option>
-                       <?php } ?>
+                        <?php foreach ($locations as $location) { ?> 
+                            <option value="<?php echo $location->id; ?>"><?php echo $location->location; ?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
-            
+
 
         </form>
 
@@ -140,52 +140,58 @@
 
 
 <script type="text/javascript">
-	  
-     $('.fancybox').fancybox();
-    $('#moderatorBtn').click(function(){
-        $('#moderatorForm').submit();
-        
+
+    $('.delete').click(function()
+    {
+        if (!confirm('Are you sure you want to delete this location?'))
+            return false;
     });
     
+    $('.fancybox').fancybox();
+    $('#moderatorBtn').click(function() {
+        $('#moderatorForm').submit();
+
+    });
+
     $().ready(function()
     {
         var options = {
             beforeSubmit: before,
             success: response
         };
-        $('#moderatorForm').ajaxForm(options);         
-       
+        $('#moderatorForm').ajaxForm(options);
+
     });
-    
-  
-	
+
+
+
     function before()
     {
-        if( $('#moderatorBtn').hasClass('disabled') )
+        if ($('#moderatorBtn').hasClass('disabled'))
         {
-            return false;	
+            return false;
         }
-		
+
         $('#loader').show();
         $('#moderatorBtn').addClass('disabled');
         $('#add_error').slideUp('fast');
     }
-	
+
     function response(responseText, statusText, xhr, $form)
     {
-	
+
         console.log(responseText);
         getResponse(responseText);
-		
-        if( status == "error" )
+
+        if (status == "error")
         {
             $('#add_error').html(message).slideDown('fast');
             $('#moderatorBtn').removeClass('disabled');
             $('#loader').hide();
-        }else
+        } else
         {
             location.reload();
-        }	
-		
+        }
+
     }
 </script>

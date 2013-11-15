@@ -44,14 +44,25 @@ class Hospital extends Basecontroller {
         $hospital_id = (int) $this->input->post("hospital_id");
         $location_id = (int) $this->input->post("location_id");
 
-         $this->rest->post('hospital/add_location', array("location_id"=>$location_id, "hospital_id"=>$hospital_id));
+        $this->rest->post('hospital/add_location', array("location_id" => $location_id, "hospital_id" => $hospital_id));
     }
-    
+
     public function delete_location($hospital_id, $location_id) {
-        $this->rest->post('hospital/delete_location', array("location_id"=>(int) $location_id, "hospital_id"=> (int) $hospital_id));
-                
+        $this->rest->post('hospital/delete_location', array("location_id" => (int) $location_id, "hospital_id" => (int) $hospital_id));
+
         $this->session->set_flashdata('message', 'Hospital location deleted successfully');
         redirect('/admin/hospital');
+    }
+
+    public function delete($hospital_id = 0) {
+        $hospital_id = (int) $hospital_id;
+        if (!$hospital_id) {
+            redirect('admin/hospital');
+        }
+
+        $this->rest->get('hospital/delete', array("hospital_id" => $hospital_id));
+        $this->session->set_flashdata('message', 'Hospital deleted successfully');
+        redirect("admin/hospital");
     }
 
     public function submit() {
