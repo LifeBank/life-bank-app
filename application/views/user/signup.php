@@ -79,7 +79,7 @@
                             
                              <div class="form-group select_shell">
                               
-                                 <select class="chzn-select form-control" id="user_hospitals" multiple="multiple" name="user_hospitals">
+                                 <select class="chzn-select form-control" id="user_hospitals" multiple="multiple" name="user_hospitals[]">
 
                                 </select>
                             </div>

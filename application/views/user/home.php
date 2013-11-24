@@ -10,7 +10,7 @@
                         </div>
                         <h3><?php echo ucfirst($user->first_name . "  " . $user->last_name); ?></h3>
 
-                        <span style="font-size: 13px; color: black"><i class="icon-location"></i><?php echo $user->location; ?></span>
+                        <span style="font-size: 13px; color: black"><i class="icon-location"></i><?php echo $user->location->location; ?></span>
                        
                         <p style="color: black">   <?php echo $user->blood_group; ?> </p>
 

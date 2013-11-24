@@ -40,11 +40,30 @@ class Hospital extends Basecontroller {
         $this->load->view('admin/hospital_location', $this->data);
     }
 
+    public function broadcast($hospital_id) {
+        $hospital_id = (int) $hospital_id;
+        $result = $this->rest->get('hospital/get', array("hospital_id" => $hospital_id));
+
+        if (isset($result->status) && $result->status) {
+            $this->data['hospital'] = $result->hospital;
+        } else {
+            $this->data['error'] = "An error occured";
+        }
+        $this->load->view('admin/hospital_broadcast', $this->data);
+    }
+
     public function submit_location() {
         $hospital_id = (int) $this->input->post("hospital_id");
         $location_id = (int) $this->input->post("location_id");
 
         $this->rest->post('hospital/add_location', array("location_id" => $location_id, "hospital_id" => $hospital_id));
+    }
+
+    public function submit_broadcast() {
+        $hospital_id = (int) $this->input->post("hospital_id");
+        $message = $this->input->post("message");
+
+        $this->rest->post('hospital/broadcast', array("message" => $message, "hospital_id" => $hospital_id));
     }
 
     public function delete_location($hospital_id, $location_id) {

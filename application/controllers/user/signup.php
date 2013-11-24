@@ -50,14 +50,14 @@ class Signup extends Basecontroller {
         $first_name = $this->input->post("first_name");
         $last_name = $this->input->post("last_name");
         $phone_number = $this->input->post("phone_number");
-        //$user_hospitals = $this->input->post("user_hospitals");
-
+        $user_hospitals = $this->input->post("user_hospitals");
+        
         $location_id = $this->input->post("location_id");
         $blood_group = $this->input->post("blood_group");
         $image_path = $this->data['signup_data']['image_path'];
         $username = $this->data['signup_data']['username'];
 
-        $user = compact("email", "first_name", "last_name", "phone_number", "location_id", "blood_group", "image_path", "username");
+        $user = compact("email", "first_name", "last_name", "phone_number", "location_id", "blood_group", "image_path", "username", "user_hospitals");
         $result = $this->rest->post('user/registration', $user, 'json');
 
         if (isset($result->status) && $result->status) {
