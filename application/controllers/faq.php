@@ -12,9 +12,15 @@ class Faq extends Basecontroller {
     }
 
     public function index() {
+        $result = $this->rest->get('faq/list');
+        if (isset($result->status) && $result->status) {
+            $this->data['faqs'] = $result->faqs;
+        } else {
+            $this->data['faqs'] = array();
+        }
+
         $this->data['content'] = $this->load->view(get_prefix() . 'faq', $this->data, TRUE);
         $this->load->view(get_layout(), $this->data);
     }
 
 }
-

@@ -58,10 +58,10 @@
         <footer>
             <div class="container">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="<?php echo $base; ?>">Home</a></li>
+                    <li><a href="<?php echo $base; ?>about">About</a></li>
+                    <li><a href="<?php echo $base; ?>contact">Contact Us</a></li>
+                    <li><a target="_blank" href="http://blog.lifebankapp.com/">Blog</a></li>
                     <li class="pull-right">&copy; Copyright 2013</li>
                 </ul>
             </div>  
