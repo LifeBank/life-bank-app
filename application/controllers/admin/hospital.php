@@ -41,15 +41,19 @@ class Hospital extends Basecontroller {
     }
 
     public function broadcast($hospital_id) {
+        $this->data['page'] = "hospital";
+
         $hospital_id = (int) $hospital_id;
         $result = $this->rest->get('hospital/get', array("hospital_id" => $hospital_id));
+        $this->data['bloodgroups'] = $this->rest->get('bloodgroups/all', array(), 'json');
 
         if (isset($result->status) && $result->status) {
             $this->data['hospital'] = $result->hospital;
         } else {
-            $this->data['error'] = "An error occured";
+            $this->data['errors'] = "An error occured";
         }
-        $this->load->view('admin/hospital_broadcast', $this->data);
+        $this->data['content'] = $this->load->view('admin/hospital_broadcast', $this->data, TRUE);
+        $this->load->view('layout/admin', $this->data);
     }
 
     public function submit_location() {
@@ -60,10 +64,42 @@ class Hospital extends Basecontroller {
     }
 
     public function submit_broadcast() {
-        $hospital_id = (int) $this->input->post("hospital_id");
-        $message = $this->input->post("message");
+        //$this->form_validation->set_rules('blood_groups', 'Blood Groups', 'trim|required');
+        $this->form_validation->set_rules('message', 'Message', 'trim|required');
 
-        $this->rest->post('hospital/broadcast', array("message" => $message, "hospital_id" => $hospital_id));
+        $error_occured = false;
+        $hospital_id = (int) $this->input->post("hospital_id");
+
+
+        if ($this->form_validation->run() == FALSE) {
+            $error_occured = true;
+        } else {
+            $message = $this->input->post("message");
+            $blood_groups = $this->input->post("blood_groups");
+
+            if (empty($blood_groups)) {
+                $this->form_validation->set_error("Blood group is required");
+                $error_occured = true;
+            } else {
+                $result = $this->rest->post('hospital/broadcast', array("message" => $message, "hospital_id" => $hospital_id, "blood_groups" => $blood_groups));               
+                if (isset($result->status) && $result->status) {
+                    $this->session->set_flashdata('message', "Broadcast message sent successfully");
+                    redirect("admin/hospital");
+                } else {
+                    $error_occured = true;
+                    if (isset($result->errors)) {
+                        foreach ($result->errors as $error) {
+                            $this->form_validation->set_error($error);
+                        }
+                    }
+                }
+            }
+        }
+
+        if ($error_occured) {
+            $this->data['errors'] = validation_errors();
+            $this->broadcast($hospital_id);
+        }
     }
 
     public function delete_location($hospital_id, $location_id) {

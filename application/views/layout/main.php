@@ -35,7 +35,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#how">How it Works</a></li>
+                        <li><a href="<?php echo $base; ?>">Home</a></li>
                         <li><a href="<?php echo $base; ?>faq">FAQs</a></li>
 
                         <?php if (isset($user)) { ?>

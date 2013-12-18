@@ -49,7 +49,7 @@
                             <td><?php echo $hospital->address; ?></td>
                             <td><?php echo $hospital->phone_numbers; ?> </td>
                             <td><a href="<?php echo $base; ?>admin/hospital/locations/<?php echo $hospital->id; ?>" class="fancybox fancybox.ajax btn mini purple"><i class="icon-edit"></i>Locations</a></td>
-                            <td><a href="<?php echo $base; ?>admin/hospital/broadcast/<?php echo $hospital->id; ?>" class="fancybox fancybox.ajax btn mini purple"><i class="icon-edit"></i>Broadcast</a></td>
+                            <td><a href="<?php echo $base; ?>admin/hospital/broadcast/<?php echo $hospital->id; ?>" class="btn mini purple"><i class="icon-edit"></i>Broadcast</a></td>
                             <td><a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a></td>
                             <td><a href="<?php echo $base; ?>admin/hospital/delete/<?php echo $hospital->id; ?>" class="btn mini red delete"><i class="icon-edit"></i> Delete</a></td>
                         </tr>
